@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alice in Freefall — 1.2 Seconds</title>
+    <meta
+      name="description"
+      content="Why a one-second fall can feel like minutes — fear, attention, memory, and how Lewis Carroll wrote Alice's rabbit-hole fall 140 years before the neuroscience caught up."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        overflow: auto;
+        background:
+          var(--damask) repeat,
+          #1d140b;
+        color: #36281a;
+      }
+      .deep {
+        position: relative;
+        max-width: 40rem;
+        margin: clamp(2.5rem, 7vw, 6rem) auto;
+        padding: clamp(2.4rem, 5vw, 4rem) clamp(1.8rem, 4.5vw, 3.2rem);
+        font-family: "IM Fell English", "EB Garamond", Georgia, serif;
+        /* step through the door and the page flips open like a book */
+        transform-origin: left center;
+        backface-visibility: hidden;
+        animation: book-open 1.4s cubic-bezier(0.33, 0, 0.2, 1) both;
+      }
+      @keyframes book-open {
+        0% {
+          transform: perspective(1600px) rotateY(-100deg);
+          opacity: 0;
+          filter: brightness(0.28);
+        }
+        22% {
+          opacity: 0;
+        }
+        100% {
+          transform: perspective(1600px) rotateY(0deg);
+          opacity: 1;
+          filter: brightness(1);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .deep {
+          animation: none;
+        }
+      }
+      .deep::before {
+        content: "";
+        position: absolute;
+        inset: -14px -10px;
+        z-index: -1;
+        background:
+          radial-gradient(
+            ellipse at 14% 3%,
+            rgba(255, 252, 242, 0.6),
+            transparent 45%
+          ),
+          radial-gradient(
+            ellipse at 88% 99%,
+            rgba(120, 84, 44, 0.28),
+            transparent 55%
+          ),
+          linear-gradient(170deg, #efe7d1, #e6dabb 60%, #dccba3);
+        filter: url(#paper-torn) drop-shadow(0 18px 42px rgba(0, 0, 0, 0.6));
+      }
+      .deep-kicker {
+        font-family: "Special Elite", monospace;
+        font-size: clamp(0.56rem, 1.4vw, 0.7rem);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        text-align: center;
+      }
+      .deep h1 {
+        font-family: "IM Fell English SC", serif;
+        font-weight: 400;
+        font-size: clamp(1.9rem, 5.6vw, 2.9rem);
+        text-align: center;
+        line-height: 1.08;
+        color: #2b1d10;
+        margin: 0.6rem 0 0.3rem;
+      }
+      .deep-dek {
+        text-align: center;
+        font-style: italic;
+        font-size: clamp(0.95rem, 2.2vw, 1.18rem);
+        color: var(--ink-dim);
+      }
+      .deep-rule {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        width: min(18rem, 86%);
+        margin: 1.3rem auto 2.4rem;
+        color: rgba(140, 47, 35, 0.7);
+        border: none;
+      }
+      .deep-rule::before,
+      .deep-rule::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(70, 50, 25, 0.34);
+      }
+      .deep-rule span {
+        font-size: 1rem;
+        line-height: 1;
+      }
+      .deep p {
+        font-size: clamp(1rem, 2vw, 1.12rem);
+        line-height: 1.78;
+        color: #3c2c1a;
+        margin-bottom: 1.1rem;
+        text-align: justify;
+        hyphens: auto;
+      }
+      .deep p em,
+      .faq-body em {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .deep code,
+      .faq-body code {
+        font-family: "Special Elite", monospace;
+        font-size: 0.84em;
+        color: #5a3d22;
+      }
+      .lede:first-letter {
+        font-family: "IM Fell English SC", serif;
+        float: left;
+        font-size: 3.1em;
+        line-height: 0.7;
+        padding: 0.06em 0.12em 0 0;
+        color: var(--accent);
+      }
+
+      .faq-intro {
+        font-family: "Special Elite", monospace;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--ink-faint);
+        text-align: center;
+        margin: 2.4rem 0 0.4rem;
+      }
+      .faq {
+        border-bottom: 1px solid rgba(70, 50, 25, 0.22);
+      }
+      .faq:first-of-type {
+        border-top: 1px solid rgba(70, 50, 25, 0.22);
+      }
+      .faq summary {
+        cursor: pointer;
+        list-style: none;
+        position: relative;
+        padding: 1rem 2.2rem 1rem 0;
+        font-family: "IM Fell English", serif;
+        font-style: italic;
+        font-size: clamp(1.1rem, 2.5vw, 1.42rem);
+        line-height: 1.32;
+        color: #2b1d10;
+        transition: color 0.25s;
+      }
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq summary::after {
+        content: "+";
+        position: absolute;
+        right: 0.25rem;
+        top: 0.95rem;
+        font-family: "Special Elite", monospace;
+        font-size: 1.15rem;
+        color: var(--accent);
+      }
+      .faq[open] summary::after {
+        content: "\2013";
+      }
+      .faq summary:hover {
+        color: var(--accent);
+      }
+      .faq-body {
+        padding: 0.2rem 0 0.9rem;
+      }
+      .faq-body p {
+        font-size: clamp(1rem, 2vw, 1.12rem);
+        line-height: 1.78;
+        color: #3c2c1a;
+        margin-bottom: 1.1rem;
+        text-align: justify;
+        hyphens: auto;
+      }
+      .faq-body p:last-child {
+        margin-bottom: 0;
+      }
+
+      .src-head {
+        font-family: "IM Fell English SC", serif;
+        font-weight: 400;
+        font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+        color: #2b1d10;
+        margin: 2.8rem 0 0.6rem;
+      }
+      .src {
+        list-style: none;
+        padding: 0;
+      }
+      .src li {
+        font-size: 0.94rem;
+        line-height: 1.75;
+        color: #3c2c1a;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(70, 50, 25, 0.2);
+        text-align: left;
+      }
+      .src .s-tag {
+        font-family: "Special Elite", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent);
+        display: block;
+        margin-bottom: 0.15rem;
+      }
+      .src em {
+        font-style: italic;
+        color: #2b1d10;
+      }
+      .src a {
+        color: var(--accent);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(140, 47, 35, 0.35);
+        transition:
+          color 0.25s,
+          border-color 0.25s;
+      }
+      .src a em {
+        color: inherit;
+      }
+      .src a:hover {
+        color: #2b1d10;
+        border-color: #2b1d10;
+      }
+      .back {
+        display: block;
+        text-align: center;
+        margin-top: 3rem;
+        font-family: "Pinyon Script", cursive;
+        font-size: clamp(1.4rem, 3.4vw, 1.9rem);
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .back:hover {
+        color: #2b1d10;
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <filter id="paper-torn" x="-8%" y="-8%" width="116%" height="116%">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.012 0.016"
+          numOctaves="3"
+          seed="7"
+          result="n"
+        />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="n"
+          scale="14"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+    </svg>
+    <div class="grain"></div>
+    <main class="deep">
+      <div class="deep-kicker">
+        An Encyclop&aelig;dia of Imaginary Lives &middot; cross-reference [4]
+      </div>
+      <h1>alice in freefall</h1>
+      <div class="deep-dek">
+        or: lewis carroll accidentally got neuroscience right
+      </div>
+      <div class="deep-rule"><span>&#10086;</span></div>
+
+      <p class="lede">
+        Every so often one of my doomed little personal projects claws its way
+        out of the graveyard.
+      </p>
+
+      <p>
+        Most don't, and they live permanently as abandoned Google Keep pages,
+        repos with names like <code>rabbit-hole-final-final-real</code>, and
+        voice memos I sent myself at 2:13 am where I sound like a person trying
+        to explain a prophetic dream before anesthesia wears off.
+      </p>
+
+      <p>This one somehow materialised.</p>
+
+      <div class="faq-intro">the questions, in case you have them</div>
+
+      <details class="faq">
+        <summary>so why does this page exist at all?</summary>
+        <div class="faq-body">
+          <p>
+            Partly because I wanted an excuse to build something in Three.js
+            after a long gap, which is a very respectable way to avoid answering
+            emails. Partly because once the idea arrived, it became extremely
+            annoying to not build it. You know when two unrelated things in your
+            brain suddenly make eye contact from across the room? That.
+          </p>
+          <p>
+            One of them was a neuroscience paper I read a while ago about fear
+            and time perception after coming across it on a podcast. It asked
+            the question everyone thinks they already know the answer to: when
+            you&rsquo;re terrified, does your brain actually speed up? Are you
+            suddenly taking in more frames per second? Is the world going
+            slow-mo because some emergency setting turns you into Neo?
+          </p>
+          <p>The answer was no. Rude.</p>
+          <p>
+            The other thing was <em>Alice&rsquo;s Adventures in Wonderland</em>,
+            which I was rereading for, well... pleasure. It's fine. We all have
+            our problems.
+          </p>
+          <p>
+            Anyways, so, I got to the rabbit hole chapter and there it was:
+            Alice falling for ages. A long, weird, observant descent. She looks
+            around, takes a jar off a shelf, reads the label, realizes
+            it&rsquo;s empty, and carefully puts it back because she
+            doesn&rsquo;t want to kill someone beneath her with marmalade
+            shrapnel. She thinks about latitude and longitude. She wonders if
+            she&rsquo;ll fall through the earth. She gets bored enough to almost
+            fall asleep.
+          </p>
+          <p>
+            And the interesting thing I noticed was that it was not unrealistic
+            at all; it was closer to what the paper says than I&rsquo;d have
+            expected.
+          </p>
+          <p>
+            And I thought, wow. Lewis Carroll wrote this in 1865, with no
+            neuroscience paper, no brain scans, no scientists throwing people
+            off towers in Dallas. He just wrote a girl falling through a rabbit
+            hole and somehow landed on the exact psychological texture of a long
+            fall: too much noticing.
+          </p>
+          <p>
+            So let's say this project was inspired by that, and putting my 3js
+            to practice. It was hard to capture the educational part but it's
+            too cool to not have mentioned it for anyone that would make it till
+            here. I tried putting the science inside the tunnel at first, but it
+            kept turning the whole thing into an interactive homework
+            assignment, which is among the more depressing genres of website.
+            So, this is the explainer part.
+          </p>
+          <p>
+            Please do not treat this as a literature review. It is a fan letter
+            to a coincidence, and I shall do my best to do the science justice.
+            Sources at the bottom.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>
+          wait, so does time actually slow down when you&rsquo;re scared?
+        </summary>
+        <div class="faq-body">
+          <p>
+            Apparently no, which is pretty inconvenient because it feels like it
+            should. The obvious theory is that fear speeds up perception. More
+            frames per second, more detail, more room to think between moments.
+            The reason this feels convincing is that basically everyone who has
+            been in a serious accident describes some version of it. The car
+            came toward me so slowly. The fall took forever. I had time to think
+            through ten things. I remember every detail.
+          </p>
+          <p>
+            A neuroscientist had his own version. When he was eight, he fell off
+            a roof in Albuquerque. He stepped past the roof&rsquo;s edge onto
+            tar paper, which he did not understand was not roof, and dropped
+            twelve feet onto his face. The fall took under a second, but his
+            memory of it did not.
+          </p>
+          <p>
+            He grew up, became a neuroscientist, and spent some time trying to
+            figure out whether his childhood faceplant had revealed something
+            interesting.
+          </p>
+          <p>Respect.</p>
+          <p>
+            And so he started collecting stories: A police officer fires three
+            shots during a chase and experiences them as separate, deliberate
+            decisions, with lengthy, entire thoughts in between: ricochet
+            angles, bystanders, his career ending. His partner hears the shots
+            as one quick burst. A doctor gets thrown from a motorcycle at 45 mph
+            and feels sure the tumble lasted fifteen seconds. Physics says
+            five-ish.
+          </p>
+          <p>
+            The same pattern seemed to exist everywhere. Time changed during
+            these situations.
+          </p>
+          <p>The obvious next question: did it, actually?</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>the experiment was insane in a very academic way</summary>
+        <div class="faq-body">
+          <p>
+            Eagleman first tried roller coasters, which I love because the image
+            of a neuroscience lab going to a theme park for &ldquo;data&rdquo;
+            is already perfect. Unfortunately, roller coasters were apparently
+            too fun. Not scary enough. The brain did not believe death was on
+            the table.
+          </p>
+          <p>
+            So they found a 150-foot SCAD diving tower in Dallas. SCAD stands
+            for Suspended Catch Air Device, which sounds fake in the way all
+            real extreme-sport infrastructure sounds fake. You fall backward
+            from a platform into a net, no rope, no pleasant view of your
+            landing. Just sky, air, maybe regret.
+          </p>
+          <p>
+            Eagleman tested it himself three times before sending volunteers up,
+            and he said it remained terrifying every time, which is...
+            comforting.
+          </p>
+          <p>
+            Twenty-three people did the fall wearing a device he built called a
+            perceptual chronometer. The device flashed numbers between positive
+            and negative images faster than the eye can normally read. Under
+            regular conditions, the number blurs. That was the trap.
+          </p>
+          <p>
+            If fear actually made perception faster, the volunteers should have
+            been able to read the number during the fall. The world would slow,
+            the flicker would separate, and the number would appear.
+          </p>
+          <p>However, nobody read it. Zero people became Spiderman.</p>
+          <p>
+            But hold on, the cool part is: when they estimated how long the fall
+            had lasted, they said their own fall took about a third longer than
+            someone else&rsquo;s identical fall.
+          </p>
+          <p>
+            So the slow motion was real as an experience, it just wasn&rsquo;t
+            happening live. Very &ldquo;I didn&rsquo;t change anything during
+            the event but I did edit the footage afterward.&rdquo;
+          </p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>the brain is basically guessing from receipts</summary>
+        <div class="faq-body">
+          <p>
+            The weirdest part is that the brain doesn&rsquo;t have one neat
+            internal stopwatch keeping objective time for you. It has systems,
+            signals, attention, memory, body states, guesses. When it needs to
+            answer &ldquo;how long did that take?&rdquo; it often looks backward
+            and checks how much got written down.
+          </p>
+          <p>Dense memory feels long. Thin memory feels short.</p>
+          <p>
+            We already know this, actually. Think: a boring highway drive can
+            disappear even though it took three hours. The first day somewhere
+            new feels enormous because your brain is filing every sidewalk crack
+            like it will be examined later. Childhood summers felt endless
+            because everything was new and dramatic and your brain had no
+            templates yet. Adult summer is June, a confusingly expensive salad,
+            two work emails, then September.
+          </p>
+          <p>Fear does the same-ish thing with maybe worse lighting?</p>
+          <p>
+            Under threat, your brain records more. The car hood. The tire sound.
+            The angle of impact. The stupid irrelevant thought that somehow
+            shows up, like &ldquo;Did I leave the stove on?&rdquo; or
+            &ldquo;Alice wondering, do cats eat bats or bats eat cats?&rdquo;
+            Then later, your brain reviews the pile and makes a very reasonable
+            inference: wow, a lot happened. Must have taken forever.
+          </p>
+          <p>
+            And that is the magic trick. A densely-packed panic archive that
+            makes it feel like a slo-mo button in retrospect.
+          </p>
+          <p>
+            The police officer and his partner heard the same three gunshots.
+            One brain, in fear, wrote a novel while the other, not in fear, got
+            a sound effect.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>this does not happen every time something bad happens</summary>
+        <div class="faq-body">
+          <p>This is the part that made the Alice thing click for me.</p>
+          <p>
+            The memory-dense version depends on attention. The danger has to
+            arrive in a way the brain can register. You need enough warning for
+            your attention to grab onto the event.
+          </p>
+          <p>
+            A car sliding toward you from across an intersection? Your brain has
+            time to lock in. The moment swells. Details get sticky. If you never
+            noticed the car and got hit, well, then, nope.
+          </p>
+          <p>
+            A pothole you don&rsquo;t see before your bike flips? Nothing
+            cinematic. No elegant slow fall. Just a missing chunk and then the
+            aftermath.
+          </p>
+          <p>
+            Eagleman talks about being thrown over his handlebars into a pothole
+            once and remembering none of it, which is almost funny after the
+            roof story because the brain is apparently very picky about when it
+            wants to become an experimental filmmaker.
+          </p>
+          <p>
+            This matters because it means the slow-motion feeling is not
+            &ldquo;fear&rdquo; alone. It&rsquo;s fear plus attention. The world
+            has to present itself to you in time for your brain to start
+            recording.
+          </p>
+          <p>Which brings us back to Alice.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>
+          alice is weirdly calm for a child falling through the earth
+        </summary>
+        <div class="faq-body">
+          <p>
+            Yes, the coolest part! Alice&rsquo;s fall is not a blackout, nor an
+            impact and then memory gap and then aftermath. Instead, it is a long
+            attentional event.
+          </p>
+          <p>She watches herself fall.</p>
+          <p>
+            That&rsquo;s the whole thing. She is noticing and not merely
+            dropping. She has time to inspect shelves. She has enough mental
+            bandwidth to worry about dropping a jar on someone below, which
+            seems very polite under the circumstances, I know. But it is
+            surprisingly realistic under the circumstances, which makes it so
+            cool. She thinks about geography. She gets lost in little theories.
+            She becomes bored, which is such an incredible detail because
+            boredom is what happens when fear has had too much page space and
+            starts looking for hobbies.
+          </p>
+          <p>
+            Carroll probably wrote it this way because a quick fall would be
+            boring on the page. Or maybe he fell too? Honestly, I am not sure.
+            But I think he nailed it. A child drops into darkness, lands,
+            chapter over. Terrible.
+          </p>
+          <p>
+            But accidentally, or intuitively, or through whatever strange
+            private weather makes a writer good, he gave the fall the one
+            condition that makes a fall feel long in real life: attention.
+          </p>
+          <p>
+            Alice&rsquo;s descent is long because it is full, even if the
+            physics would not say so.
+          </p>
+          <p>
+            The book is fantasy, yes, obviously. Sure, nobody is doing peer
+            review on the talking rabbit. But the emotional mechanics of the
+            fall are not exactly incorrect. Carroll certainly didn&rsquo;t know
+            that memory density could stretch retrospective time. Writers keep
+            doing this, which is honestly very irritating for science, no?
+            Someone makes up a scene because it feels right, and then 150 years
+            later neuroscience arrives wearing a lab coat like,
+            &ldquo;Unfortunately, the whimsical Victorian was cooking.&rdquo;
+          </p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>also this is kind of the whole problem of being alive</summary>
+        <div class="faq-body">
+          <p>
+            The fear stuff is dramatic, so it gets the tower and the wristband
+            and the near-death anecdotes. But the same basic arithmetic is
+            everywhere.
+          </p>
+          <p>A day with novelty expands. A day with routine collapses.</p>
+          <p>
+            This is why vacations feel long while you&rsquo;re in them and then
+            somehow short when you&rsquo;re back. Why the first week in a new
+            city feels like a whole semester. Why a terrible conversation can
+            feel like three hours even if it was twelve minutes. Why months can
+            disappear when every day has the same shape.
+          </p>
+
+          <p>
+            But it also means attention is almost literally a part of duration.
+            The more you notice, the more time seems to have existed. Maybe not
+            during the moment, maybe only afterward, but it still counts. Memory
+            is where most of us live anyway.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>so why make a rabbit hole?</summary>
+        <div class="faq-body">
+          <p>
+            The coincidence felt too good to leave as a note in my phone, you
+            know?
+          </p>
+          <p>
+            A girl falls in a children&rsquo;s book. She notices everything. A
+            neuroscientist falls off a roof and wonders why it felt so long.
+            Volunteers fall backward off a tower in Dallas wearing a device that
+            tries to catch the brain in the act.
+          </p>
+          <p>
+            This was my little, albeit time-consuming attempt to put those
+            things in the same room: the fantasy fall, the neuroscience fall,
+            the strange human habit of turning attention into time.
+          </p>
+          <p>
+            Also I wanted to build something in Three.js. I am sorry, but
+            sometimes the honest explanation is &ldquo;I wanted the rabbit to
+            move.&rdquo; I&rsquo;m just a girl.
+          </p>
+        </div>
+      </details>
+
+      <h2 class="src-head">sources</h2>
+      <ul class="src">
+        <li>
+          <span class="s-tag">Primary study</span>
+          Stetson C., Fiesta M.P., Eagleman D.M. &mdash;
+          <a
+            href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0001295"
+            target="_blank"
+            rel="noopener"
+            >&ldquo;Does Time Really Slow Down during a Frightening
+            Event?&rdquo;</a
+          >
+          <em>PLoS ONE</em> 2(12): e1295, 2007.
+        </li>
+        <li>
+          <span class="s-tag">Listening</span>
+          Eagleman, D. &mdash; <em>Inner Cosmos</em>, Ep. 1:
+          <a
+            href="https://eagleman.com/podcast/does-time-really-slow-down-when-youre-in-fear-for-your-life/"
+            target="_blank"
+            rel="noopener"
+            >&ldquo;Does time really slow down when you&rsquo;re in fear for
+            your life?&rdquo;</a
+          >
+          (2023).
+        </li>
+        <li>
+          <span class="s-tag">Reading</span>
+          Eagleman, D. &mdash;
+          <a
+            href="https://eagleman.com/books/incognito/"
+            target="_blank"
+            rel="noopener"
+            ><em>Incognito: The Secret Lives of the Brain</em></a
+          >
+          (2011).
+        </li>
+        <li>
+          <span class="s-tag">The fall itself</span>
+          Carroll, L. &mdash;
+          <a
+            href="https://www.gutenberg.org/ebooks/11"
+            target="_blank"
+            rel="noopener"
+            ><em>Alice&rsquo;s Adventures in Wonderland</em></a
+          >, Chapter I (1865). Illustrations by John Tenniel.
+        </li>
+        <li>
+          <span class="s-tag">The rabbit</span>
+          <a
+            href="https://sketchfab.com/3d-models/animated-rabbit-3d-animal-model-244017d76f804d6eaa0dd2c33bcff50f"
+            target="_blank"
+            rel="noopener"
+            >&ldquo;Animated Rabbit &mdash; 3D Animal Model&rdquo;</a
+          >
+          by <em>AnimalMesh 3D</em>, CC-BY. Scene props from
+          <a href="https://polyhaven.com" target="_blank" rel="noopener"
+            >Poly Haven</a
+          >, CC0.
+        </li>
+        <li>
+          <span class="s-tag">The door</span>
+          <a
+            href="https://commons.wikimedia.org/wiki/File:Carved_wooden_door,_Stone_Town,_Zanzibar_(33)_(29103171035).jpg"
+            target="_blank"
+            rel="noopener"
+            >&ldquo;Carved wooden door, Stone Town, Zanzibar&rdquo;</a
+          >
+          by <em>Richard Mortel</em>, CC BY 2.0; cropped and toned.
+        </li>
+        <li>
+          <span class="s-tag">The garden</span>
+          <a
+            href="https://commons.wikimedia.org/wiki/File:Sonnenberg_Gardens,_Canandaigua,_New_York_-_20210820_-_38_-_Italian_Garden.jpg"
+            target="_blank"
+            rel="noopener"
+            >&ldquo;Sonnenberg Gardens, Italian Garden&rdquo;</a
+          >
+          by <em>Andre Carrotflower</em>, CC BY-SA 4.0; cropped and
+          colour-graded.
+        </li>
+      </ul>
+
+      <a class="back" href="index.html">&larr; back through the door</a>
+    </main>
+  </body>
+</html>

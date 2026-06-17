@@ -1,0 +1,9 @@
+During a life-threatening fall (first-person), you feel like time is extended - you estimate your fall took ~30% longer than observers estimated
+
+Observers watching someone else fall estimate normal duration
+
+BUT the brain doesn't actually process faster - it's a memory trick (amygdala creates denser memories, and when recalling, brain interprets that density as longer duration)
+
+This means: the "slow motion" feeling is RETROSPECTIVE - you don't actually see/perceive faster in the moment, but when you look back, the richness of memory makes it feel like it was longer
+
+The user is pointing out that the project's phase 3 description is backwards - it frames the fall as "1.2 seconds actual time with visual chaos," but that's the objective observer's perspective, not what the person falling would experience. From the faller's POV, those 1.2 seconds would feel stretched out and much longer. The key tension is that the science shows the slow-motion feeling is a memory illusion—you don't actually perceive faster during the fall, but you remember it as stretched because of how densely your brain encodes the experience. So the 1.2 seconds is the objective duration, but the subjective experience (both during and in memory) feels extended. The creative challenge might be whether Phase 3 should represent the actual real-time experience or lean into that stretched feeling from the start. I'm realizing the real power here is that Alice's lack of fear actually sharpens her perception—she's curious and calm during the fall, which is why she notices everything, whereas a real person would be flooded with survival instinct and fragmented memories. The contrast between the faller's rich, extended experience and the observer's 1.2-second glimpse works better with a real person because the audience can viscerally feel that gap, but Alice's fall works differently because her fearlessness creates a different kind of density in what she perceives.

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.2 Seconds — a fall down the rabbit hole</title>
+    <meta name="description" content="The most famous fall in literature lasted 1.2 seconds. She remembered it lasting hours. Scroll down the rabbit hole — sound on — and see what she saw." />
+    <meta name="theme-color" content="#0a0705" />
+    <meta property="og:title" content="1.2 Seconds" />
+    <meta property="og:description" content="The fall lasted 1.2 seconds. She remembered it lasting hours. Scroll down the rabbit hole and find out why." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="media/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="scroll-runway" id="runway"></div>
+
+    <!-- rough/torn edges for the paper cards -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <filter id="paper-torn" x="-8%" y="-8%" width="116%" height="116%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.016" numOctaves="3" seed="7" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="paper-torn-sm" x="-12%" y="-12%" width="124%" height="124%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="3" seed="3" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+
+    <!-- painted layers -->
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="fx-canvas"></canvas>
+
+
+    <!-- cinematic dressing -->
+    <div class="cbar top"></div>
+    <div class="cbar bot"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+
+    <!-- corner labels -->
+    <div class="corner tl">An Encyclopædia of Imaginary Lives</div>
+    <div class="corner tr">Carroll, L. &middot; 1832–1898</div>
+
+    <!-- opening: a dry reference entry you fall straight through -->
+    <div class="refpage" id="refpage">
+      <article class="ref-sheet">
+        <div class="ref-stamp">a faithful account<br>of a falling brain</div>
+        <div class="ref-runhead">
+          <span>An Encyclop&aelig;dia of Imaginary Lives</span><span>Vol. III &middot; Carroll&ndash;Cheshire</span>
+        </div>
+        <div class="ref-note">first edition,<br>1865</div>
+        <h1 class="ref-title">Carroll, Lewis</h1>
+        <div class="ref-pron">
+          /&#712;k&aelig;r&#601;l/ &middot; pseudonym of <em>Charles Lutwidge Dodgson</em>, 1832&ndash;1898
+        </div>
+        <div class="ref-rule"><span>&#10086;</span></div>
+        <div class="ref-cols">
+          <div class="ref-body">
+            <p class="ref-lead"><span class="dropcap">E</span>nglish author, mathematician and
+            logician, chiefly remembered for the children's novel <em>Alice's Adventures in
+            Wonderland</em> (1865).<sup>[1]</sup> The book is conventionally read as nonsense,
+            its episodes valued for invention rather than accuracy.<sup>[2]</sup></p>
+
+            <h2 class="ref-h2">Down the Rabbit-Hole</h2>
+            <p>The narrative opens as the protagonist follows a waistcoated rabbit and descends
+            a vertical shaft of indeterminate depth. The passage is notable for its handling of
+            <em>subjective duration</em>: the falling child examines cupboards, shelves and an
+            empty marmalade jar wholly at her leisure.<sup>[3]</sup></p>
+
+            <p>For more than a century this was filed under whimsy. <span class="ref-faint">A
+            later cross-reference would file it elsewhere.</span><sup>[4]</sup></p>
+          </div>
+
+          <aside class="ref-box">
+            <div class="rb-head">Carroll, Lewis</div>
+            <dl>
+              <dt>Born</dt><dd>27 January 1832, Daresbury</dd>
+              <dt>Died</dt><dd>14 January 1898 (aged 65)</dd>
+              <dt>Pen name</dt><dd>Lewis Carroll</dd>
+              <dt>Occupation</dt><dd>Author; mathematician</dd>
+              <dt>Notable work</dt><dd><em>Alice's Adventures<br>in Wonderland</em>, 1865</dd>
+              <dt>Subject of</dt><dd>this entry, briefly</dd>
+            </dl>
+          </aside>
+        </div>
+        <div class="ref-foot">
+          <span class="ref-loading">fetching plates&hellip;</span>
+          <span class="ref-cue">scroll &middot; sound on</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- the title card you fall through -->
+    <div class="dive-line" id="dive-line">
+      <div class="dl-card">
+        <div class="dl-title">alice, interrupted</div>
+        <div class="dl-rule"><span>&#10086;</span></div>
+        <div class="dl-quote">&lsquo;In another moment down went Alice after it,<br>never once considering how in the world<br>she was to get out again.&rsquo;</div>
+        <div class="dl-attr">Lewis Carroll &middot; Down the Rabbit-Hole &middot; 1865</div>
+        <div class="dl-cue">
+          <span class="dl-sound">&#9834;&ensp;turn your sound on &mdash; the button, top-right&ensp;&#8599;</span>
+          <span>&#8595;&ensp;scroll to fall</span>
+          <span>&#10022;&ensp;reach for whatever glints &mdash; hold to lift it, drag to turn it over</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- white rabbit plate (tenniel, 1890, public domain) -->
+    <div class="rabbit-plate" id="rabbit-plate">
+      <img src="media/white-rabbit.jpg" alt="The White Rabbit, by John Tenniel" />
+      <div class="rp-caption">J. Tenniel, <em>The Nursery Alice</em>, 1890</div>
+    </div>
+
+    <!-- hero text -->
+    <div class="text-layer">
+      <div class="hero" id="hero"></div>
+      <div class="sub" id="sub"></div>
+    </div>
+
+    <!-- memory caption cards -->
+    <div class="memcard left" id="mc-left"><div class="mc-inner" id="mcl-inner"></div></div>
+    <div class="memcard right" id="mc-right"><div class="mc-inner" id="mcr-inner"></div></div>
+
+    <!-- hud -->
+    <div class="hud-timer" id="hud-timer">
+      <div class="hud-val" id="timer-val">0.00s</div>
+      <div class="hud-label">elapsed</div>
+      <div class="hud-val hud-depth" id="depth-val">0 mi</div>
+      <div class="hud-label">fallen · by her estimate</div>
+    </div>
+    <div class="hud-mem" id="hud-mem">
+      <div class="hud-val" id="mem-val">0</div>
+      <div class="hud-label">memories written</div>
+    </div>
+
+    <!-- scroll prompt -->
+    <div class="scroll-prompt" id="scroll-prompt">
+      <span>scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+
+    <!-- sound toggle -->
+    <button class="sound-toggle" id="sound-toggle" aria-label="toggle sound">
+      <span class="st-icon">&#9834;</span><span class="st-state">sound off</span>
+    </button>
+
+    <!-- finale: the bottom of the fall, and the door out -->
+    <div class="finale" id="finale">
+      <div class="finale-inner" id="finale-inner">
+        <div class="fin-sheet">
+          <div class="fin-rule"><span>&#10086;</span></div>
+          <p class="fin-lede" data-fin="0">
+            &lsquo;Either the well was very deep,<br>or she fell very slowly.&rsquo;
+          </p>
+          <p class="fin-turn" data-fin="1">
+            Carroll wrote that in 1865 and called it a children&rsquo;s story.<br>
+            A hundred and forty years later, a neuroscientist dropped<br>
+            people off a tower and found the mechanism.
+          </p>
+        </div>
+
+        <!-- the second door — a real carved doorway, the way out -->
+        <a class="door" id="door" href="faq.html" data-fin="2" aria-label="step through, read on">
+          <span class="door-img">
+            <span class="door-within"><span class="door-step">step through &rarr;</span></span>
+            <span class="door-gate left"></span>
+            <span class="door-gate right"></span>
+          </span>
+          <span class="door-cite">
+            <span class="dc-num">[4]</span> Stetson, Fiesta &amp; Eagleman,
+            <em>&ldquo;Does Time Really Slow Down&hellip;&rdquo;</em>
+          </span>
+        </a>
+
+        <div class="fin-foot" data-fin="2">
+          <a href="#" id="again-link">fall again &#8635;</a>
+          <span class="fb-sep">&middot;</span>
+          <a href="#" id="share-link">share &#8599;</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="effects.js"></script>
+    <script src="audio.js"></script>
+    <script src="engine.js"></script>
+    <script type="module" src="wormhole.js"></script>
+    <script type="module" src="rabbit.js"></script>
+  </body>
+</html>
