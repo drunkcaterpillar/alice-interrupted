@@ -37,11 +37,18 @@ const readP = () => (window.APP ? window.APP.p : fallbackP);
 
 const rand = (a, b) => a + Math.random() * (b - a);
 
-// renderer
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, LOW ? 1.5 : 2));
+// renderer. no MSAA + a lower pixel ratio on phones, where the heavy scene
+// otherwise eats too much gpu memory at the tunnel mouth and crashes the tab
+const renderer = new THREE.WebGLRenderer({ antialias: !LOW, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, LOW ? 1.25 : 2));
 renderer.setSize(innerWidth, innerHeight);
 renderer.setClearColor(0x000000, 0);
+// if the gpu does bail, don't let it take the whole page down
+renderer.domElement.addEventListener(
+  "webglcontextlost",
+  (e) => e.preventDefault(),
+  false,
+);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.22;
 
@@ -1356,7 +1363,7 @@ let lastBuzz = 0;
 
 // a few small flickering embers that ride along in the shaft
 const EMBERS = [];
-for (let i = 0; i < (LOW ? 2 : 3); i++) {
+for (let i = 0; i < (LOW ? 0 : 3); i++) {
   const light = new THREE.PointLight(0xffb060, 0, 4.5, 2);
   scene.add(light);
   const sprite = new THREE.Sprite(

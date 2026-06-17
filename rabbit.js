@@ -20,6 +20,10 @@ const FALL_START = 0.1; // keep in sync w/ engine.js
 const readP = () => (window.APP ? window.APP.p : 0);
 const introActive = () => readP() < FALL_START + 0.012;
 
+// phones skip the whole 3d rabbit: a 2nd WebGL context crashes a lot of them
+// right at the tunnel mouth, and the flat tenniel plate is already the
+// fallback (engine keeps it up since window.__rabbitReady never gets set).
+if (!LOW) {
 // renderer on its own transparent canvas, sits above the paper
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, LOW ? 1.5 : 2));
@@ -263,3 +267,4 @@ addEventListener("resize", () => {
   placeCamera();
   renderer.setSize(innerWidth, innerHeight);
 });
+} // end if (!LOW)
