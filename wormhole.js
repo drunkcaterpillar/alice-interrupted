@@ -22,7 +22,7 @@ import { OutputPass } from "https://esm.sh/three@0.160.0/examples/jsm/postproces
 // (uses the physical screen, so resizing a laptop window never trips it.)
 const LOW =
   matchMedia("(pointer: coarse)").matches &&
-  Math.min(screen.width, screen.height) < 820;
+  Math.min(screen.width, screen.height) < 600;
 
 const TOTAL = 42000;
 const FALL_START = 0.1; // keep in sync w/ engine.js
@@ -174,7 +174,7 @@ earthTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
 const tubeMat = new THREE.MeshStandardMaterial({
   map: earthTex,
   bumpMap: earthTex,
-  bumpScale: 0.55,
+  bumpScale: 0.22, // low: a heavily-tiled bumpMap turns into sparkly noise
   color: 0x9d8268,
   roughness: 0.95,
   metalness: 0.0,
@@ -1738,10 +1738,11 @@ function animate(ts) {
   // daylight dies off in the first stretch of the fall
   mouthLight.intensity = 5200 * Math.max(0, 1 - fallProg * 5.5);
 
-  // motion blur tracks scroll speed, goes sharp again when you stop to read
+  // motion blur tracks scroll speed, goes sharp again when you stop to read.
+  // capped lower now the auto-fall is fast, or it smears the whole way down
   if (blurPass)
     blurPass.uniforms.strength.value +=
-      (Math.min(0.28, Math.abs(velP) * 260) - blurPass.uniforms.strength.value) * 0.18;
+      (Math.min(0.15, Math.abs(velP) * 150) - blurPass.uniforms.strength.value) * 0.18;
 
   updateHeld();
 

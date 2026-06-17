@@ -16,7 +16,7 @@ import { MeshoptDecoder } from "https://esm.sh/three@0.160.0/examples/jsm/libs/m
 // must match the same test in wormhole.js.
 const LOW =
   matchMedia("(pointer: coarse)").matches &&
-  Math.min(screen.width, screen.height) < 820;
+  Math.min(screen.width, screen.height) < 600;
 
 const FALL_START = 0.1; // keep in sync w/ engine.js
 const readP = () => (window.APP ? window.APP.p : 0);
