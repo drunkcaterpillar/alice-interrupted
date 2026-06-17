@@ -12,9 +12,11 @@ import * as THREE from "https://esm.sh/three@0.160.0";
 import { GLTFLoader } from "https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "https://esm.sh/three@0.160.0/examples/jsm/libs/meshopt_decoder.module.js";
 
+// "phone tier" — only actual touch phones, not laptops with small windows.
+// must match the same test in wormhole.js.
 const LOW =
-  Math.min(innerWidth, innerHeight) < 700 ||
-  (navigator.hardwareConcurrency || 8) <= 4;
+  matchMedia("(pointer: coarse)").matches &&
+  Math.min(screen.width, screen.height) < 820;
 
 const FALL_START = 0.1; // keep in sync w/ engine.js
 const readP = () => (window.APP ? window.APP.p : 0);

@@ -18,9 +18,11 @@ import { ShaderPass } from "https://esm.sh/three@0.160.0/examples/jsm/postproces
 import { OutputPass } from "https://esm.sh/three@0.160.0/examples/jsm/postprocessing/OutputPass.js";
 
 // quality tier - phones + small screens get a lighter scene
+// "phone tier" — only actual touch phones, not laptops with small windows.
+// (uses the physical screen, so resizing a laptop window never trips it.)
 const LOW =
-  Math.min(innerWidth, innerHeight) < 700 ||
-  (navigator.hardwareConcurrency || 8) <= 4;
+  matchMedia("(pointer: coarse)").matches &&
+  Math.min(screen.width, screen.height) < 820;
 
 const TOTAL = 42000;
 const FALL_START = 0.1; // keep in sync w/ engine.js
