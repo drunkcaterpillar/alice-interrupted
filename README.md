@@ -1,9 +1,37 @@
-During a life-threatening fall (first-person), you feel like time is extended - you estimate your fall took ~30% longer than observers estimated
+# alice, interrupted
 
-Observers watching someone else fall estimate normal duration
+scroll down the rabbit hole. 🐇
 
-BUT the brain doesn't actually process faster - it's a memory trick (amygdala creates denser memories, and when recalling, brain interprets that density as longer duration)
+**▸ [play it](https://drunkcaterpillar.github.io/alice-interrupted/)**
 
-This means: the "slow motion" feeling is RETROSPECTIVE - you don't actually see/perceive faster in the moment, but when you look back, the richness of memory makes it feel like it was longer
+you fall through a long, winding tunnel full of victorian junk — teacups, clocks, a chess set, a marmalade jar, books that come apart when you grab them — and land at a door. step through.
 
-The user is pointing out that the project's phase 3 description is backwards - it frames the fall as "1.2 seconds actual time with visual chaos," but that's the objective observer's perspective, not what the person falling would experience. From the faller's POV, those 1.2 seconds would feel stretched out and much longer. The key tension is that the science shows the slow-motion feeling is a memory illusion—you don't actually perceive faster during the fall, but you remember it as stretched because of how densely your brain encodes the experience. So the 1.2 seconds is the objective duration, but the subjective experience (both during and in memory) feels extended. The creative challenge might be whether Phase 3 should represent the actual real-time experience or lean into that stretched feeling from the start. I'm realizing the real power here is that Alice's lack of fear actually sharpens her perception—she's curious and calm during the fall, which is why she notices everything, whereas a real person would be flooded with survival instinct and fragmented memories. The contrast between the faller's rich, extended experience and the observer's 1.2-second glimpse works better with a real person because the audience can viscerally feel that gap, but Alice's fall works differently because her fearlessness creates a different kind of density in what she perceives.
+### how to use it
+- **turn the sound on.** it's half the experience.
+- **scroll** to fall (let go and it keeps drifting down on its own).
+- **touch anything that glints** — pick it up, spin it around, the teacups spill.
+
+best on a laptop. works on a phone, just heavier.
+
+### the why (optional)
+alice's fall in the book takes *forever* — she reads jar labels, does mental math, gets bored. turns out there's real neuroscience for why a fall can feel that long, and carroll kind of nailed it in 1865 without trying. i didn't want the site to feel like homework, so all of that lives behind the door if you're curious.
+
+### built with
+no framework, no build step. just files.
+
+- vanilla **html / css / js**
+- **three.js** for the 3d tunnel — straight off a cdn, no npm — plus a custom motion-blur shader and raycasting for the grab-and-turn props
+- the **web audio api** for everything you hear (all synthesized, there are zero audio files)
+- canvas 2d for the dust and light
+- props are meshopt-compressed `.glb` (poly haven, cc0); fonts from google fonts
+
+run it locally with any static server:
+
+```
+python3 -m http.server 8000
+```
+
+…then open `localhost:8000`.
+
+### borrowed bits
+the carved door, the garden, the rabbit, and all the props are credited [behind the door](https://drunkcaterpillar.github.io/alice-interrupted/faq.html). the words are lewis carroll's, 1865.
