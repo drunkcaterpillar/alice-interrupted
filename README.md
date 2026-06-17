@@ -7,9 +7,9 @@ You're Alice now. Scroll down the rabbit hole. 🐇
 Fall through a long, winding tunnel full of victorian junk, from teacups to clocks, a chess set, a marmalade jar, and books that come apart when you grab them -- and land at a door to the garden.
 
 ### how to use it
-- **turn the sound on.** it's half the experience.
-- **scroll** to fall (and if you let go, it keeps drifting down on its own).
-- **touch anything that glints** — pick it up, spin it around, take a closer look. (the teacups spill)
+- **Turn the sound on.** it's half the experience.
+- **Scroll** to fall (and if you let go, it keeps drifting down on its own).
+- **Touch anything that glints** -- pick it up, spin it around, take a closer look. (the teacups spill)
 
 Best on a laptop. Also works on a phone, just slower.
 
