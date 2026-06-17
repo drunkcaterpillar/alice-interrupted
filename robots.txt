@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://drunkcaterpillar.github.io/alice-interrupted/sitemap.xml
