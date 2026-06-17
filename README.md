@@ -11,7 +11,7 @@ Fall through a long, winding tunnel full of victorian junk, from teacups to cloc
 - **Scroll** to fall (and if you let go, it keeps drifting down on its own).
 - **Touch anything that glints** -- pick it up, spin it around, take a closer look. (the teacups spill)
 
-Best on a laptop. Also works on a phone, just slower.
+Best on a laptop. Might work on a phone, just slower (crashes on mine).
 
 ### the why (optional)
 Alice's fall in the book takes *forever* as she reads jar labels, does mental math, gets bored. Turns out there's real neuroscience for why a fall can feel that long, and Carroll kind of nailed it in 1865 without trying. I didn't want the site to feel like homework, and this is mostly just a fun scroll-driven 3js project, but all of that lives behind the door if you're curious.
