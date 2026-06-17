@@ -14,7 +14,6 @@ import { MeshoptDecoder } from "https://esm.sh/three@0.160.0/examples/jsm/libs/m
 import { RGBELoader } from "https://esm.sh/three@0.160.0/examples/jsm/loaders/RGBELoader.js";
 import { EffectComposer } from "https://esm.sh/three@0.160.0/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "https://esm.sh/three@0.160.0/examples/jsm/postprocessing/RenderPass.js";
-import { ShaderPass } from "https://esm.sh/three@0.160.0/examples/jsm/postprocessing/ShaderPass.js";
 import { OutputPass } from "https://esm.sh/three@0.160.0/examples/jsm/postprocessing/OutputPass.js";
 
 // quality tier - phones + small screens get a lighter scene
@@ -91,50 +90,13 @@ if (!LOW) {
   });
 }
 
-// radial motion blur - the feel of speed
-const RadialBlurShader = {
-  uniforms: {
-    tDiffuse: { value: null },
-    strength: { value: 0 },
-  },
-  vertexShader: /* glsl */ `
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: /* glsl */ `
-    uniform sampler2D tDiffuse;
-    uniform float strength;
-    varying vec2 vUv;
-    void main() {
-      vec2 dir = vUv - 0.5;
-      vec4 sum = vec4(0.0);
-      float total = 0.0;
-      for (int i = 0; i < 9; i++) {
-        float f = float(i) / 9.0;
-        float w = 1.0 - f * 0.7;
-        vec2 uv = 0.5 + dir * (1.0 - strength * f);
-        sum += texture2D(tDiffuse, uv) * w;
-        total += w;
-      }
-      gl_FragColor = sum / total;
-    }
-  `,
-};
-
+// composer is only here for the sRGB + tone-mapping output pass on desktop;
+// no motion blur (it smeared the props and read as jaggy). phones render
+// straight to the canvas, which already tone-maps correctly.
 let composer = null;
-let blurPass = null;
-// ?noblur dev param - deterministic frames for headless checks
-const NOBLUR = new URLSearchParams(location.search).has("noblur");
-if (!LOW && !NOBLUR) {
+if (!LOW) {
   composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  blurPass = new ShaderPass(RadialBlurShader);
-  composer.addPass(blurPass);
-  // without this the composer skips tone mapping + srgb and the
-  // whole tunnel goes dim - phones (no composer) looked brighter
   composer.addPass(new OutputPass());
 }
 
@@ -174,7 +136,7 @@ earthTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
 const tubeMat = new THREE.MeshStandardMaterial({
   map: earthTex,
   bumpMap: earthTex,
-  bumpScale: 0.22, // low: a heavily-tiled bumpMap turns into sparkly noise
+  bumpScale: 0.12, // low: a heavily-tiled bumpMap turns into sparkly noise
   color: 0x9d8268,
   roughness: 0.95,
   metalness: 0.0,
@@ -1738,11 +1700,6 @@ function animate(ts) {
   // daylight dies off in the first stretch of the fall
   mouthLight.intensity = 5200 * Math.max(0, 1 - fallProg * 5.5);
 
-  // motion blur tracks scroll speed, goes sharp again when you stop to read.
-  // capped lower now the auto-fall is fast, or it smears the whole way down
-  if (blurPass)
-    blurPass.uniforms.strength.value +=
-      (Math.min(0.15, Math.abs(velP) * 150) - blurPass.uniforms.strength.value) * 0.18;
 
   updateHeld();
 
